@@ -5,9 +5,13 @@ const allocationsTypes = `
         _id: ID!
         key: String!
         avatar: String!
-        title: String!
-        description: String!
+        decoration: String!
         date: String!
+        phone: String!
+        type: String!
+        name: String!
+        email: String!
+        street: String
     }
     
     type AllAllocations {
@@ -30,7 +34,16 @@ const allocationsQueries = `
 `;
 
 const allocationsMutations = `
-    createAllocations(avatar: String!, title: String!, description: String!, date: String!): Allocation
+    createAllocations(
+        avatar: String!,
+        decoration: String!,
+        phone: String!,
+        date: String!,
+        type: String!,
+        name: String!,
+        email: String!,
+        street: String
+    ): Allocation
     deleteAllocations(key: String!): Boolean
 `;
 

@@ -15,9 +15,13 @@ export const allocationsResolvers = {
             const newAllocation = {
                 key: Date.now().toString(),
                 avatar: data.avatar,
-                title: data.title,
-                description: data.description,
-                date: data.date
+                decoration: data.decoration,
+                name: data.name,
+                date: data.date,
+                phone: data.phone,
+                type: data.type,
+                email: data.email,
+                street: data.street,
             };
             const response = await Allocations.insert(newAllocation);
             newAllocation._id = response.insertedIds[0];

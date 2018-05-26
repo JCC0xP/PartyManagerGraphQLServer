@@ -6,7 +6,12 @@
   "scripts": {
     "start": "babel-node ./src/index.js --presets es2015,stage-2"
   },
-  "keywords": ["Party manager", "Party manager API", "GraphQl", "GraphQl API"],
+  "keywords": [
+    "Party manager",
+    "Party manager API",
+    "GraphQl",
+    "GraphQl API"
+  ],
   "author": "JCC0XP",
   "license": "ISC",
   "dependencies": {
