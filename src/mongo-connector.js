@@ -6,6 +6,7 @@ module.exports = async () => {
     const db = await MongoClient.connect(MONGO_URL);
 
     return {
-        Allocations: db.collection('allocations')
+        Allocations: db.collection('allocations'),
+        Decorations: db.collection('decorations'),
     };
 };
