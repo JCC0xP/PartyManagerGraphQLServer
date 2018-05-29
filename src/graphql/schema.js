@@ -5,11 +5,14 @@ import { Query } from './query';
 import { Mutation } from './mutation';
 
 import { allocationsTypes } from './resources/allocations/allocations.schema';
+import { decorationsTypes } from './resources/decorations/decorations.schema';
 
 import { allocationsResolvers } from './resources/allocations/allocations.resolvers';
+import { decorationResolvers } from './resources/decorations/decorations.resolvers';
 
 const resolvers = merge(
     allocationsResolvers,
+    decorationResolvers,
 );
 
 const SchemaDefinition = `
@@ -25,6 +28,7 @@ export default makeExecutableSchema({
         Query,
         Mutation,
         allocationsTypes,
+        decorationsTypes,
     ],
     resolvers
 });
