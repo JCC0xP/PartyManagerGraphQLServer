@@ -11,10 +11,11 @@ export const allocationsResolvers = {
 
     Mutation: {
 
-        createAllocations: async (root, data, { mongo: { Allocations } }) => {
+        createAllocations: async (root, data, { mongo: { Allocations, Decorations } }) => {
+            const allocationOfDecorationDate = await Allocations.find({ date: data.date, decoration: data.decoration }).toArray();
+            const decoration = await Decorations.find({ key: data.decoration }).toArray();
             const newAllocation = {
                 key: Date.now().toString(),
-                avatar: data.avatar,
                 decoration: data.decoration,
                 name: data.name,
                 date: data.date,
@@ -23,9 +24,13 @@ export const allocationsResolvers = {
                 email: data.email,
                 street: data.street,
             };
-            const response = await Allocations.insert(newAllocation);
-            newAllocation._id = response.insertedIds[0];
-            return newAllocation;
+            if (allocationOfDecorationDate.length < decoration[0].amount) {
+                newAllocation.avatar = decoration[0].avatar;
+                const response = await Allocations.insert(newAllocation);
+                newAllocation._id = response.insertedIds[0];
+                return newAllocation;
+            }
+            return new Error('Limite da decoracao atingido !');
         },
 
         deleteAllocations: async (root, data, { mongo: { Allocations } }) => {
@@ -57,6 +62,18 @@ export const allocationsResolvers = {
 
         allocationsOfDay: async (root, data, { mongo: { Allocations } }) => {
             return await Allocations.find({ date: root.date }).toArray();
+        },
+
+    },
+
+    Allocation: {
+
+        decoration: async (root, data, { mongo: { Decorations } }) => {
+            const response = await Decorations.find({ key: root.decoration }).toArray();
+            if (response.length > 0) {
+                return response[0].name;
+            }
+            return 'Decoracao Generica';
         },
 
     }

@@ -35,7 +35,6 @@ const allocationsQueries = `
 
 const allocationsMutations = `
     createAllocations(
-        avatar: String!,
         decoration: String!,
         phone: String!,
         date: String!,
